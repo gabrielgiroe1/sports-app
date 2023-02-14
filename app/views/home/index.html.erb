@@ -1,7 +1,6 @@
 <div class="container home-section d-flex flex-row justify-content-center align-items-center">
   <div class="images-section pt-3 d-none d-lg-block"></div>
 
-
   <div class="login-section pt3">
     <div class="card text-center pt-5" style="width: 23rem">
       <%= image_tag "runner-logo.jpeg", class: "card-image-tag" %>
@@ -20,10 +19,15 @@
           <div class="line"></div>
         </div>
 
-          <a href="#" class="d-block mt-4 text-decoration-none fw-bold" >
-            <%= image_tag("facebook.png", class: "facebook") %>
-            Log in with Facebook
-          </a>
+        <a href="#" class="d-block mt-4 text-decoration-none fw-bold">
+          <%= image_tag("facebook.png", class: "facebook") %>
+          Log in with Facebook
+        </a>
+        <% if notice %>
+          <p class="notice"><%= notice %></p>
+        <% elsif alert %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
         <a href="#" class="fs-6 d-block my-4 text-decoration-none">Forgot password?</a>
 
       </div>
