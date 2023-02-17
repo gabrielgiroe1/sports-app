@@ -1,11 +1,9 @@
 one:
   email: "user1@gmail.com"
   full_name: "user 1"
-  username: "first user"
   phone_number: "0735123123"
 
 two:
   email: "user2@gmail.com"
   full_name: "user 2"
-  username: "second user"
   phone_number: "0735321321"

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2023-02-16
+  distance: 1
+  time: 2023-02-16 18:45:06
+  user: one
+
+two:
+  date: 2023-02-16
+  distance: 1
+  time: 2023-02-16 18:45:06
+  user: two
