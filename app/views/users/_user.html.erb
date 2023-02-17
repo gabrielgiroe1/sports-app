@@ -1,0 +1,7 @@
+<div class="comments">
+  <%= link_to user.full_name, user %>
+  <% if current_user.role == "admin"%>
+    <%= link_to "Destroy", admin_destroy_user_path(user), method: :delete, data: { confirm: "You sure?" } %>
+
+<% end %>
+</div>

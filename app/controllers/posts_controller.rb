@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :correct_user, only: :destroy
+
   def index
     @posts = Post.all
   end
@@ -45,6 +46,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.find_by(id: params[:id])
     redirect_to root_url if @post.nil?
   end
+
   private
 
   def post_params

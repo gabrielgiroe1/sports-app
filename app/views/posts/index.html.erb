@@ -1,16 +1,20 @@
 <h1>Post</h1>
+<p>filter by date: </p>
+<%= form_with model: @post do |f| %>
+  <%f.text_field  %>
+<%end %>
 <ul>
   <% @posts.each do |post| %>
     <div>
       <u><b><%= post.user.full_name %></b></u>
     </div>
+
+    <%= link_to "Destroy", admin_destroy_user_path(post.user), method: :delete, data: { confirm: "You sure?" } %>
     <p>time: <%= post.time.hour > 0 ? post.time.hour.to_s + " hour," : "" %>  <%= post.time.min %> minutes
       and <%= post.time.sec %> seconds</p>
     <p>Date: <%= post.date %></p>
     <p>Distance: <%= post.distance %> km</p>
-    <p>average
-      time=  <%= (((post.distance.to_i * 1000) / (post.time.hour * 360 + post.time.min * 60 +
-      post.time.sec)) * 0.36).to_s + " km/h" %></p>
+    <p>average time:  <%=average_speed(post.distance, post.time).to_s + "km" %></p>
     <%= link_to "Edit this post", edit_post_path(post) %> |
     <%= button_to "Delete this post", post, method: :delete %>
     <hr>
