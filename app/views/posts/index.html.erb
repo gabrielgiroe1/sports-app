@@ -1,7 +1,8 @@
 <h1>Post</h1>
 <p>filter by date: </p>
 <%= form_with model: @post do |f| %>
-  <%f.text_field  %>
+  <%f.text_field
+  %>
 <%end %>
 <ul>
   <% @posts.each do |post| %>
