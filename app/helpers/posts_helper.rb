@@ -5,6 +5,8 @@ module PostsHelper
   end
 
   def filter_by_date(start_date, end_date)
-    @posts = User.where("created_at between (?) and (?)", start_date, end_date)
+    @posts = Post.where("created_at between (?) and (?)", start_date, end_date)
+    # Post.where('created_at BETWEEN ? AND ?', start_date,end_date )
+
   end
 end
