@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'users/registrations', sessions: 'users/sessions' }
   post 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
   get 'users/:id' => 'users#show', as: :user
 
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post "/filters", to: "filters#index"
   get "/posts", to: "posts#index"
   get "/posts/new", to: "posts#new"
+  put "/users/:id", to: "users/registrations#update", as: "update_user_registration"
   resources :posts
   resources :users
 end
