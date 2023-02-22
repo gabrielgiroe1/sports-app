@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-   root "home#index"
+  root "home#index"
 
   # get "/users", to: "users#index"
+  get 'filter_by_dates', to: 'posts#index', as: 'filter_by_dates'
   post "/filters", to: "filters#index"
   get "/posts", to: "posts#index"
   get "/posts/new", to: "posts#new"

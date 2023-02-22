@@ -4,8 +4,17 @@ class PostsController < ApplicationController
   def index
     if current_user.role == "admin" or current_user.role == "user_manager"
       @posts = Post.all
+      if params[:start_date] && params[:end_date]
+        @posts = Post.where(date: params[:start_date]..params[:end_date])
+      else
+        @posts = Post.all
+      end
     else
-      @posts = current_user.posts
+      if params[:start_date] && params[:end_date]
+        @posts = current_user.posts.where(date: params[:start_date]..params[:end_date])
+      else
+        @posts = current_user.posts
+      end
     end
   end
 
@@ -14,7 +23,7 @@ class PostsController < ApplicationController
   end
 
   def show
-      @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def create
@@ -50,10 +59,6 @@ class PostsController < ApplicationController
   def correct_user
     @post = current_user.posts.find_by(id: params[:id])
     redirect_to root_url if @post.nil?
-  end
-
-  def filter_by_date
-    @date_start= params[:user][]
   end
 
   private
