@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def index
-    if current_user.role == "admin" or current_user.role == "user_manager"
+    if current_user.admin? or current_user.user_manager?
       @posts = Post.all
       if params[:start_date] && params[:end_date]
         @posts = Post.where(date: params[:start_date]..params[:end_date])
