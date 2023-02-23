@@ -1,0 +1,24 @@
+<%  @c=1 %>
+<table class="table">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Week </th>
+    <th scope="col">Average Distance </th>
+    <th scope="col">Average Speed</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @weekly_averages.each do |weekly_average| %>
+    <tr>
+      <th scope="row"><%=@c %></th>
+      <%@c+=1 %>
+<!--      <td><%#= weekly_average.week.strtime('%Y-%m-%d') %></td>-->
+      <th scope="row"><%= Date.today%></th>
+      <th><%= weekly_average.avg_distance.round(2) %></th>
+      <th><%= weekly_average.avg_speed.round(2) %></th>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

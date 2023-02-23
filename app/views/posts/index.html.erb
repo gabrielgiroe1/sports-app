@@ -1,19 +1,24 @@
-<h1>Post</h1>
-<ul>
-  <% @posts.each do |post| %>
-    <div>
-      <u><b><%= post.user.full_name %></b></u>
+<div class=" d-flex ">
+  <div class="container  d-flex flex-row justify-content-center align-item-center">
+    <div class="card text-center pt-5" style="width:40rem">
+      <div class="card-body">
+        <div class="mb-3 mt-4">
+          <h1>Post</h1>
+          <%= link_to 'average_speed', weekly_averages_path %>
+          <p>filter by date: </p>
+          <%= form_tag filter_by_dates_path, method: :get do %>
+            <label>Start Date:</label>
+            <%= text_field_tag :start_date %>
+            <br>
+            <label>End Date:</label>
+            <%= text_field_tag :end_date %>
+            <br>
+            <%= submit_tag "Filter" %>
+          <% end %>
+          <%= render 'posts/posts' %>
+        </div>
+      </div>
+      <%= link_to "New post", new_post_path %>
     </div>
-    <p>time: <%= post.time.hour > 0 ? post.time.hour.to_s + " hour," : "" %>  <%= post.time.min %> minutes
-      and <%= post.time.sec %> seconds</p>
-    <p>Date: <%= post.date %></p>
-    <p>Distance: <%= post.distance %> km</p>
-    <p>average
-      time=  <%= (((post.distance.to_i * 1000) / (post.time.hour * 360 + post.time.min * 60 +
-      post.time.sec)) * 0.36).to_s + " km/h" %></p>
-    <%= link_to "Edit this post", edit_post_path(post) %> |
-    <%= button_to "Delete this post", post, method: :delete %>
-    <hr>
-  <% end %>
-</ul>
-<%= link_to "New post", new_post_path %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<h1>Show all user here</h1>
+<hr>
+<%@users.each do |user| %>
+<tr>
+  <%= user.full_name %>
+  <br>
+  <%= user.email %>
+  <% if current_user.admin? %>
+  <td><%= link_to 'Show', user %></td>
+  <td> <%= link_to 'Edit User', edit_user_registration_path(user) %></td>
+  <td><%= button_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+    <%end %>
+</tr>
+  <hr>
+  <br>
+<%end %>
+<%= link_to 'registration/new', new_user_registration_path %>

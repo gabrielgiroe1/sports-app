@@ -1,7 +1,21 @@
 class PostsController < ApplicationController
   before_action :correct_user, only: :destroy
+
   def index
-    @posts = Post.all
+    if current_user.admin? or current_user.user_manager?
+      @posts = Post.all
+      if params[:start_date] && params[:end_date]
+        @posts = Post.where(date: params[:start_date]..params[:end_date])
+      else
+        @posts = Post.all
+      end
+    else
+      if params[:start_date] && params[:end_date]
+        @posts = current_user.posts.where(date: params[:start_date]..params[:end_date])
+      else
+        @posts = current_user.posts
+      end
+    end
   end
 
   def new
@@ -38,13 +52,15 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to root_path, status: :see_other
+    flash[:success] = "This post was deleted"
+    redirect_to posts_path, status: :see_other
   end
 
   def correct_user
     @post = current_user.posts.find_by(id: params[:id])
     redirect_to root_url if @post.nil?
   end
+
   private
 
   def post_params
