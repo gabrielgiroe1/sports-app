@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   root "home#index"
 
   # get "/users", to: "users#index"
+  get 'weekly_averages', to: 'reports#weekly_averages', as: 'weekly_averages'
   get 'filter_by_dates', to: 'posts#index', as: 'filter_by_dates'
-  post "/filters", to: "filters#index"
+  get 'average_speed', to: 'posts#average_speed', as: 'average_speed'
+
   get "/posts", to: "posts#index"
   get "/posts/new", to: "posts#new"
   put "/users/:id", to: "users/registrations#update", as: "update_user_registration"
