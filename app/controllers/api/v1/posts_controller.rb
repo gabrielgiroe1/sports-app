@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class Api::V1::PostsController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def index
@@ -53,12 +53,12 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     flash[:success] = "This post was deleted"
-    redirect_to posts_path, status: :see_other
+    redirect_to api_v1_posts_path, status: :see_other
   end
 
   def correct_user
     @post = current_user.posts.find_by(id: params[:id])
-    redirect_to root_url if @post.nil?
+    redirect_to api_v1_root_path if @post.nil?
   end
 
   private

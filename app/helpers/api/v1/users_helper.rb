@@ -1,4 +1,4 @@
-module UsersHelper
+module Api::V1::UsersHelper
   def admin?
     if current_user.role =="admin"
       true

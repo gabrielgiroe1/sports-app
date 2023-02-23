@@ -14,13 +14,13 @@
       Posted <%= time_ago_in_words(post.created_at) %> ago.
       <br>
       <% if current_user == post.user %>
-        <%= link_to "Edit this post", edit_post_path(post) %> |
+        <%= link_to "Edit this post", edit_api_v1_post_path(post) %> |
         <%= button_to "Delete this post", post, method: :delete, data: { confirm: "You sure?" } %>
 
       <% end %>
       <% if current_user.role =="admin" %>
-        <%= link_to "Edit this post", edit_post_path(post) %>
-        <%= button_to "Delete user", admin_destroy_user_path(post.user), method: :delete, data: { confirm: "You sure?" } %>
+        <%= link_to "Edit this post",  edit_api_v1_post_path(post) %>
+        <%= button_to "Delete user", api_v1_admin_destroy_user_path(post.user), method: :delete, data: { confirm: "You sure?" } %>
 
         <%= button_to "Delete this post", post, method: :delete, data: { confirm: "You sure?" } %>
       <%end%>

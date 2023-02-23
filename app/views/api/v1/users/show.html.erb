@@ -7,7 +7,7 @@
   <%= user.email %>
   <% if current_user.admin? %>
   <td><%= link_to 'Show', user %></td>
-  <td> <%= link_to 'Edit User', edit_user_registration_path(user) %></td>
+  <td> <%= link_to 'Edit User', api_v1_user_registration_path(user) %></td>
   <td><%= button_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
     <%end %>
@@ -15,4 +15,4 @@
   <hr>
   <br>
 <%end %>
-<%= link_to 'registration/new', new_user_registration_path %>
+<%= link_to 'registration/new',  new_api_v1_user_registration_path %>
