@@ -1,4 +1,5 @@
 class Api::V1::PostsController < ApplicationController
+  respond_to :json
   before_action :correct_user, only: :destroy
 
   def index
