@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -86,6 +86,22 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       edit_admin_user_path(resource)
     else
       edit_user_registration_path(resource)
+    end
+  end
+
+
+
+  private
+
+  def respond_with(resource, options={})
+    if resource.persisted?
+      render json: {
+        status: { code: 200, message: 'Signed up successfully', data: resource }
+      }, status: :ok
+    else
+      render json: {
+        status: { message: 'User could not be created successfully', errors: resource.errors.full_messages }, status: :unprocessable_entity
+      }
     end
   end
 end
