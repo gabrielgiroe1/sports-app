@@ -13,11 +13,11 @@
     <% if current_user.admin? %>
       <%= link_to 'user post', post_path(user)  %> |
       <td><%= link_to 'Show', user %></td> |
-      <td> <%= link_to "Edit User", api_v1_update_user_registration_path(user) %></td>
+      <td> <%= link_to "Edit User", update_user_registration_path(user) %></td>
       <td><%= button_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <%end %>
   </tr>
   <hr>
   <br>
 <%end %>
-<%= link_to 'create new user',    new_api_v1_user_registration_path %>
+<%= link_to 'create new user',    new_user_registration_path%>

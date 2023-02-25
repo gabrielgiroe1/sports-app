@@ -16,7 +16,7 @@ class Api::V1::UsersController < ApplicationController
 
   def show
      @users = User.all
-     render json: @users
+     render json: @user
   end
 
   def create
