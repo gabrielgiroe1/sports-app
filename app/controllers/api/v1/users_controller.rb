@@ -1,10 +1,9 @@
-class Api::V1::UsersController < ApplicationController
+class Api::V1::UsersController < ApiController
   respond_to :json
   def index
     @users = User.all
     render json: @users
   end
-
   def new
     @user= User.new
     render json: @user
@@ -22,6 +21,7 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     @user= User.new(user_params)
+    debugger
     if @user.save
       render json: @user, status: :created
       # flash[:success]= "User was created"
@@ -42,12 +42,18 @@ class Api::V1::UsersController < ApplicationController
   end
 
 
+  # def destroy
+  #   @user= User.find(params[:id])
+  #   @user.destroy
+  #   if @user.destroy
+  #     redirect_to api_v1_root_path, notice: "User deleted."
+  #   end
+  # end
+
+
   def destroy
-    @user= User.find(params[:id])
-    @user.destroy
-    if @user.destroy
-      redirect_to api_v1_root_path, notice: "User deleted."
-    end
+    current_user.update(authentication_token: nil)
+    head :no_content
   end
 
   private

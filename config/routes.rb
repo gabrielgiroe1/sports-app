@@ -4,11 +4,11 @@ Rails.application.routes.draw do
       root "home#index"
 
       resources :users do
-        post "/users", to: 'api/v1/users#create'
+        post "users", to: 'users#create'
         post 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
         get 'users/:id' => 'users#show', as: :user
-        put "/users/:id", to: "users/registrations#update", as: "update_user_registration"
-        devise_for :users, :controllers => { registrations: 'users/registrations', sessions: 'users/sessions' }
+        put "/users/:id", to: "registrations#update", as: "update_user_registration"
+        devise_for :users, :controllers => { registrations: 'api/v1/users/registrations', sessions: 'api/v1/users/sessions' }
       end
 
       resources :posts do
