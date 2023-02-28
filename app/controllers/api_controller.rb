@@ -1,6 +1,8 @@
 class ApiController < ApplicationController
   before_action :authenticate_api_v1_user!
-  # before_action :configure_permitted_parameters, if: :devise_controller?
+  skip_before_action :verify_authenticity_token, only: [:create]
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
 

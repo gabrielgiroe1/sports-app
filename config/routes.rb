@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get '/current_user', to: 'current_user#index'
   namespace :api do
     namespace :v1, defaults: { format: :json } do
       root "home#index"
@@ -22,6 +21,9 @@ Rails.application.routes.draw do
                    registrations: 'api/v1/users/registrations'
                  }
 
+      # get '/current_user', to: 'api/v1/current_user#index'
+
+
       resources :posts do
         get "/posts", to: "posts#index"
         get "/posts/new", to: "posts#new"
@@ -34,4 +36,13 @@ Rails.application.routes.draw do
       end
     end
   end
+
+
+
+  devise_for :users,
+             path: 'api/v1/users',
+             controllers: {
+               sessions: 'api/v1/users/sessions',
+               registrations: 'api/v1/users/registrations'
+             }
 end

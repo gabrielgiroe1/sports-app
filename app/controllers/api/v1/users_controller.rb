@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApiController
   include RackSessionFix
+  skip_before_action :verify_authenticity_token, only: [:create]
   respond_to :json
   def index
     @users = User.all
@@ -22,7 +23,6 @@ class Api::V1::UsersController < ApiController
 
   def create
     @user= User.new(user_params)
-    debugger
     if @user.save
       render json: @user, status: :created
       # flash[:success]= "User was created"
@@ -43,15 +43,6 @@ class Api::V1::UsersController < ApiController
   end
 
 
-  # def destroy
-  #   @user= User.find(params[:id])
-  #   @user.destroy
-  #   if @user.destroy
-  #     redirect_to api_v1_root_path, notice: "User deleted."
-  #   end
-  # end
-
-
   def destroy
     current_user.update(authentication_token: nil)
     head :no_content
@@ -60,6 +51,6 @@ class Api::V1::UsersController < ApiController
   private
 
   def user_params
-    params.require(:user).permit(:email, :full_name, :phone_number, :password)
+    params.require(:user).permit(:email, :full_name, :phone_number, :password, :password_confirmation)
   end
 end

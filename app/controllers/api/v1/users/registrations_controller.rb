@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   include RackSessionFix
+  before_action :configure_sign_up_params, only: [:create]
   respond_to :json
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :phone_number])
+  end
+
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -11,9 +17,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
 
   # GET /resource/edit
   # def edit
@@ -95,7 +98,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   def respond_with(resource, _opts = {})
     if resource.persisted?
       render json: {
-        status: {code: 200, message: 'Signed up sucessfully.'},
+        status: {code: 200, message: 'Signed up successfully.'},
         data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
       }
     else
