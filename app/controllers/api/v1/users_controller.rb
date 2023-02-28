@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApiController
+  include RackSessionFix
   respond_to :json
   def index
     @users = User.all

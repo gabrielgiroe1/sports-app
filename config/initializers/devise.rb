@@ -10,7 +10,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # config.navigational_formats = []
-  config.navigational_formats = ['*/*', :html, :turbo_stream]
+  config.navigational_formats = []
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
@@ -325,10 +325,10 @@ Devise.setup do |config|
   config.jwt do |jwt|
     jwt.secret = Rails.application.credentials.fetch(:secret_key_base)
     jwt.dispatch_requests = [
-      ['POST', %r{^/users/sign_in$}]
+      ['POST', %r{^/login$}]
     ]
     jwt.revocation_requests = [
-      ['DELETE', %r{^/users/sign_out}]
+      ['DELETE', %r{^/logout$}]
     ]
     jwt.expiration_time = 120.minutes.to_i
   end

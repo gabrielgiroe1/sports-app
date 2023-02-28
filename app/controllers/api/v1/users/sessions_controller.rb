@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::SessionsController < Devise::SessionsController
+  include RackSessionFix
   respond_to :json
   # before_action :configure_sign_in_params, only: [:create]
 
@@ -28,24 +29,23 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
   private
 
-  def respond_with(resource, options={})
+  def respond_with(resource, _opts = {})
     render json: {
-      status: { code: 200, message: "User signed in successfully", data: current_user }
+      status: { code: 200, message: 'Logged in sucessfully.' },
+      data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
     }, status: :ok
   end
 
   def respond_to_on_destroy
-    jwt_payload = JWT.decode(request.headers['Authorization'].split(' ')[1], Rails.application.credentials.fetch(:secret_key_base)).first
-    current_user = User.find(jwt_payload['sub'])
     if current_user
       render json: {
         status: 200,
-        message: "Signed out successfully"
+        message: "logged out successfully"
       }, status: :ok
     else
       render json: {
         status: 401,
-        message: "User has no active session"
+        message: "Couldn't find an active session."
       }, status: :unauthorized
     end
   end

@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   before_action :authenticate_api_v1_user!
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
 
