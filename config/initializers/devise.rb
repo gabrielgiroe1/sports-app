@@ -9,7 +9,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  config.navigational_formats = ['*/*', :html, :turbo_stream]
+  config.navigational_formats = []
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
@@ -310,7 +310,25 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  # config.jwt do |jwt|
+  #   jwt.secret = Rails.application.credentials.fetch(:secret_key_base)
+  #   jwt.dispatch_requests = [
+  #     ['POST', %r{^/users/sign_in$}]
+  #   ]
+  #   jwt.revocation_requests =  [
+  #     ['DELETE', %r{^/users/sign_out$}]
+  #   ]
+  #   jwt.expiration_time = 120.minutes.to_i
+  # end
 
-
-
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.credentials.devise(:jwt_secret_key)
+    jwt.dispatch_requests = [
+      ['POST', %r{^/api/v1/users/sign_in$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/api/v1/users/sign_out$}]
+    ]
+    jwt.expiration_time = 1.day.to_i
+  end
 end

@@ -25,7 +25,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+gem 'jbuilder', '~> 2.11.5'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -50,7 +50,11 @@ gem "bootsnap", require: false
 
 gem 'bootstrap', '~> 5.2.3'
 gem 'devise', '~>  4.8.1'
+gem 'devise-jwt', '~> 0.10.0'
 gem 'faker', '~> 3.1.1'
+gem 'rack-cors', '~> 2.0'
+gem 'jsonapi-serializer'
+gem 'fast_jsonapi'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

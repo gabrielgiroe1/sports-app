@@ -1,0 +1,24 @@
+<div class=" d-flex ">
+  <div class="container  d-flex flex-row justify-content-center align-item-center">
+    <div class="card text-center pt-5" style="width:40rem">
+      <div class="card-body">
+        <div class="mb-3 mt-4">
+          <h1>Post</h1>
+          <%= link_to 'average_speed', api_v1_weekly_averages_path %>
+          <p>filter by date: </p>
+          <%= form_tag api_v1_filter_by_dates_path, method: :get do %>
+            <label>Start Date:</label>
+            <%= text_field_tag :start_date %>
+            <br>
+            <label>End Date:</label>
+            <%= text_field_tag :end_date %>
+            <br>
+            <%= submit_tag "Filter" %>
+          <% end %>
+          <%= render 'api/v1/posts/posts' %>
+        </div>
+      </div>
+      <%= link_to "New post",  new_api_v1_post_path %>
+    </div>
+  </div>
+</div>
