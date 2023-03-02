@@ -14,5 +14,5 @@ users=User.order(:created_at).take(10)
 
 9.times do |n|
   date = Faker::Date.between(from: '2023-01-01', to: '2023-02-28')
-  users.each { |user| user.posts.create!(date: date, distance: rand(1..10), time: "00:20:00") }
+  users.each { |user| user.posts.create!(date: date, distance: rand(1..10), time: rand(1..60)) }
 end
