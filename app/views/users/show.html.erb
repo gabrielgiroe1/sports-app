@@ -1,18 +1,29 @@
-<h1>Show all user here</h1>
-<hr>
-<%@users.each do |user| %>
-<tr>
-  <%= user.full_name %>
-  <br>
-  <%= user.email %>
-  <% if current_user.admin? %>
-  <td><%= link_to 'Show', user %></td>
-  <td> <%= link_to 'Edit User', edit_user_registration_path(user) %></td>
-  <td><%= button_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<div class=" d-flex ">
+  <div class="container  d-flex flex-row justify-content-center align-item-center">
+    <div class="card text-center pt-5" style="width:40rem">
+      <div class="card-body">
+        <div class="mb-3 mt-4">
 
-    <%end %>
-</tr>
-  <hr>
-  <br>
-<%end %>
-<%= link_to 'registration/new', new_user_registration_path %>
+          <h1>Show all user here</h1>
+          <hr>
+          <% @users.each do |user| %>
+            <tr>
+              <%= user.full_name %>
+              <br>
+              <%= user.email %>
+              <% if current_user.admin? %>
+                <td><%= link_to 'Show', user %></td>
+                <td> <%= link_to 'Edit User', edit_user_registration_path(user) %></td>
+                <td><%= button_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+              <% end %>
+            </tr>
+            <hr>
+            <br>
+          <% end %>
+          <%= link_to 'registration/new', new_user_registration_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
