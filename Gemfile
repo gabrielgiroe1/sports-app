@@ -51,6 +51,8 @@ gem "bootsnap", require: false
 gem 'bootstrap', '~> 5.2.3'
 gem 'devise', '~>  4.8.1'
 gem 'faker', '~> 3.1.1'
+gem 'pg', '~> 1.4.6'
+gem 'groupdate', '~> 6.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
