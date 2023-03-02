@@ -4,13 +4,13 @@ class PostsController < ApplicationController
   def index
     if current_user.admin? or current_user.user_manager?
       @posts = Post.all
-      if params[:start_date] && params[:end_date]
+      if params[:start_date] != "" && params[:end_date] != ""
         @posts = Post.where(date: params[:start_date]..params[:end_date])
       else
         @posts = Post.all
       end
     else
-      if params[:start_date] && params[:end_date]
+      if params[:start_date] != "" && params[:end_date] != ""
         @posts = current_user.posts.where(date: params[:start_date]..params[:end_date])
       else
         @posts = current_user.posts

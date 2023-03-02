@@ -8,13 +8,14 @@
           <p>filter by date: </p>
           <%= form_tag filter_by_dates_path, method: :get do %>
             <label>Start Date:</label>
-            <%= text_field_tag :start_date %>
+            <%= text_field_tag :start_date, nil,class:"form-control", placeholder: "dd:mm:yyyy" %>
             <br>
             <label>End Date:</label>
-            <%= text_field_tag :end_date %>
+            <%= text_field_tag :end_date, nil,class:"form-control", placeholder: "dd:mm:yyyy" %>
             <br>
             <%= submit_tag "Filter" %>
           <% end %>
+          <hr>
           <%= render 'posts/posts' %>
         </div>
       </div>

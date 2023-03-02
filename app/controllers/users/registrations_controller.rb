@@ -38,6 +38,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
   def update
+    debugger
     self.resource = resource_class.to_adapter.get!(params[:id])
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
